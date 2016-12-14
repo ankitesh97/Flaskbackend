@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Demo</title> <meta http-equiv="content-type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	<h1>image</h1>
+  <input id="testbutton" type="button" value="Test" />
+  <p id="results">results appended here: </p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $("#testbutton").click(function() {
+
+        $.ajax({
+            url: 'http://localhost:4000/get_image',
+            dataType: 'json',
+            success: function(data) {
+                $("#results").append('all good');
+                console.log(data);
+                // var b = data["payload"];
+                // var img = document.createElement('img');
+        		// console.log(b);
+       		    // var c = String.fromCharCode.apply(null, b.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "));
+				// console.log(c);
+				// img.src = "data:image/jpg;base64," + btoa(c);
+				// document.body.appendChild(img);
+				// window.open('data:image/jpeg;,'+c);
+				// var bytes = new Uint8Array(c.length / 2);
+
+				// for (var i = 0; i < c.length; i += 2) {
+    				// bytes[i / 2] = parseInt(c.substring(i, i + 2), 16);
+				// }
+
+				// Make a Blob from the bytes
+				// var blob = new Blob([bytes], {type: 'image/bmp'});
+
+				// Use createObjectURL to make a URL for the blob
+				// var image = new Image();
+				// image.src = URL.createObjectURL(blob);
+				// document.body.appendChild(img);
+				var b = data['url'];
+				console.log(b);
+			    var img = $('<img />', {src : b });
+    			img.appendTo('body');
+				// $('#myimg').html('<img class="img-responsive"  src="'+b+'"/>');
+
+            },
+             error: function() {
+                $("#results").append("error");
+                alert('error');
+            }
+        });
+
+    });
+});
+</script>
+</body>
+</html>
